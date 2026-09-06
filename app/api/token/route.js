@@ -1,15 +1,15 @@
 import { StreamClient } from "@stream-io/node-sdk";
 
-const apiKey = process.env.STREAM_API_KEY;
-const apiSecret = process.env.STREAM_API_SECRET;
-
 export async function POST(request) {
   try {
     const { userId } = await request.json();
 
+    const apiKey = process.env.STREAM_API_KEY || process.env.NEXT_PUBLIC_STREAM_API_KEY;
+    const apiSecret = process.env.STREAM_API_SECRET;
+
     if (!apiKey || !apiSecret) {
       return Response.json(
-        { error: "Missing API credentials" },
+        { error: "Missing Stream API credentials (STREAM_API_KEY or STREAM_API_SECRET not set in environment)" },
         { status: 500 }
       );
     }

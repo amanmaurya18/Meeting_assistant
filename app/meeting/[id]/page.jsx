@@ -37,7 +37,7 @@ export default function MeetingPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.token) setToken(data.token);
-        else setError("No token returned");
+        else setError(data.error || "No token returned");
       })
       .catch((err) => setError(err.message));
   }, [user]);
