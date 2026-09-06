@@ -1,0 +1,2 @@
+vision-agents[getstream,gemini,deepgram]
+python-dotenv
