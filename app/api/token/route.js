@@ -8,8 +8,11 @@ export async function POST(request) {
     const apiSecret = process.env.STREAM_API_SECRET;
 
     if (!apiKey || !apiSecret) {
+      const missing = [];
+      if (!apiKey) missing.push("STREAM_API_KEY");
+      if (!apiSecret) missing.push("STREAM_API_SECRET");
       return Response.json(
-        { error: "Missing Stream API credentials (STREAM_API_KEY or STREAM_API_SECRET not set in environment)" },
+        { error: `Netlify is missing environment variable(s): ${missing.join(", ")}. Please configure them in Netlify Site Configuration > Environment variables.` },
         { status: 500 }
       );
     }
